@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+<head>
+    <meta charset="UTF-8">
+    <title>CS 235 Flix</title>
+</head>
+<body>
+<div id="logo">
+    <header>
+        <h1 id="logo">CS 235 Flix</h1>
+    </header>
+</div>
+    <div class="topnav">
+        <a id="home" href="{{ url_for('movie_bp.home') }}">Home</a>
+        <a id="movies" href="{{ url_for('movie_bp.movies') }}">Movies</a>
+        <a id="search">Search</a>
+    </div>
+    <div class="page_content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
