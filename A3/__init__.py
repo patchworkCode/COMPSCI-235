@@ -17,7 +17,8 @@ def create_app(test_config=None):
 
     with app.app_context():
         # Register blueprints.
-        from .movie_blueprint import movie
-        app.register_blueprint(movie.movie_blueprint)
+        from .blueprints import movies,home
+        app.register_blueprint(movies.movie_blueprint)
+        app.register_blueprint(home.home_blueprint)
 
     return app
