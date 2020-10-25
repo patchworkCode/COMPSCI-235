@@ -1,4 +1,4 @@
-# COVID-19 Web Application
+# CS-235 Flix
 
 ## Description
 
