@@ -41,7 +41,7 @@ class Actor:
             return False
 
 
-
+""""
 
 def main():
     actor1 = Actor('Bruce Lee')
@@ -54,3 +54,4 @@ def main():
     print(actor2.check_if_this_actor_worked_with(actor1))
 main()
 
+"""

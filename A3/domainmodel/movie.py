@@ -3,128 +3,132 @@ from A3.domainmodel.actor import Actor
 from A3.domainmodel.director import Director
 
 class Movie:
-    def __init__(self, title: str, date: int):
-        self.__genres = []
-        self.__actors = []
-        self.__runtime_minutes = 0
-        self.__director = Director("")
-        self.__description = None
-        if title == "" or type(title) is not str:
-            self.__title = None
+    def __init__(self, rank: int, movie_title: str, movie_year: int):
+        # TITLE
+        if movie_title == "" or type(movie_title) is not str:
+            self.movie_title = None
         else:
-            self.__title = title.strip()
-        if date == "" or type(date) is not int:
-            self.__date = None
+            self.movie_title = movie_title.strip()
+
+        # YEAR
+        if movie_year == "" or type(movie_year) is not int:
+            self.movie_year = None
+        elif movie_year < 1900:
+            raise ValueError("ValueError exception thrown: Year is < 1900")
         else:
-            if date < 1900:
-                self.__date = None
-            else:
-                self.__date = date
+            self.movie_year = movie_year
+
+        #rank
+        if rank == "" or type(rank) is not int:
+            self._rank = 0
+        else:
+            self._rank = rank
+
+        self._description = None
+        self._director = None
+        self._actors = []
+        self._genres = []
+        self._runtime_minutes = 0
+
+        self.description = None
+        self.director = None
+        self.actors = []
+        self.genres = []
+        self.runtime_minutes = 0
+
 
     @property
-    def description(self) -> str:
-        return self.__description
+    def rank(self):
+        return self._rank
+
+    # DESCRIPTION
+    @property
+    def description(self):
+        return self._description
+
+    # DIRECTOR
+    @property
+    def director(self):
+        return self._director
+
+    # ACTORS
+    @property
+    def actors(self):
+        return self._actors
+
+    # GENRES
+    @property
+    def genres(self):
+        return self._genres
+
+    # RUNTIME_MINUTES
+    @property
+    def runtime_minutes(self):
+        return self._runtime_minutes
+
+
+    # @property
+    def __repr__(self):
+        return f"<Movie {self.movie_title}, {self.movie_year}>"
+
+    def __eq__(self, other):
+        # TODO
+        return self.movie_title == other.movie_title and self.movie_year == other.movie_year
+
+    def __lt__(self, other):
+        # TODO
+        if self.movie_title == other.movie_title:
+            return self.movie_year < other.movie_year
+        else:
+            return self._rank < other._rank
+
+    def __hash__(self):
+        # TODO
+        return hash((self.movie_title, self.movie_year))
+
+    def add_actor(self, actor_obj):
+        if actor_obj not in self.actors:
+            self.actors.append(actor_obj)
+
+    def remove_actor(self, actor_obj):
+        if actor_obj in self.actors:
+            self.actors.remove(actor_obj)
+
+    def add_genre(self, genre):
+        if genre not in self.genres:
+            self.genres.append(genre)
+
+    def remove_genre(self, genre):
+        if genre in self.genres:
+            self.genres.remove(genre)
 
     @description.setter
-    def description(self, new_description):
-        if type(new_description) is str:
-            self.__description = new_description
-
-    @property
-    def director(self) -> Director:
-        return self.__director
+    def description(self, text):
+        if text == "" or type(text) is not str:
+            self._description = None
+        else:
+            self._description = text.strip()
 
     @director.setter
-    def director(self, new_director):
-        if type(new_director) is Director:
-            self.__director = new_director
+    def director(self, name):
+        self._director = name
 
-    @property
-    def runtime_minutes(self) -> int:
+    @actors.setter
+    def actors(self, actors_obj):
+        self._actors = actors_obj
 
-        return self.__runtime_minutes
+    @genres.setter
+    def genres(self, genre_obj):
+        self._genres = genre_obj
 
     @runtime_minutes.setter
     def runtime_minutes(self, runtime):
-        if type(runtime) is int:
-            if runtime < 0:
-                raise ValueError
-            else:
-                self.__runtime_minutes = runtime
-
-    @property
-    def title(self) -> str:
-        return self.__title
-
-    @title.setter
-    def title(self, title):
-        if type(title) is str and title != "":
-            self.__title = title.strip()
-
-    @property
-    def date(self) -> int:
-        return self.__date
-
-    @date.setter
-    def date(self, date):
-        if type(date) is not int:
-            if date < 1900:
-                self.__date = None
-            else:
-                self.__date = date
-
-    @property
-    def genres(self) -> list:
-        return self.__genres
-
-    @genres.setter
-    def genres(self, new_list):
-        if type(new_list) == list:
-            self.__genres = new_list
-
-    @property
-    def actors(self) -> list:
-        return self.__actors
-
-    @actors.setter
-    def actors(self, new_list):
-        if type(new_list) == list:
-            self.__actors = new_list
-
-    def __repr__(self):
-        return f"<Movie {self.title}, {self.date}>"
-
-    def __eq__(self, other):
-        if self.title == other.title and self.date == other.date:
-            return True
+        if runtime < 0:
+            raise ValueError("ValueError exception thrown: Not positive")
         else:
-            return False
+            self._runtime_minutes = runtime
 
-    def __lt__(self, other):
-        if self.__title == other.__title:
-            return self.__date < other.__date
-        else:
-            return self.__title < other.__title
-
-    def __hash__(self):
-        return hash(self.title)
-
-    def add_actor(self, actor):
-        if type(actor) is Actor and actor not in self.__actors:
-            self.__actors.append(actor)
-
-    def remove_actor(self, actor):
-        if actor in self.__actors:
-            self.__actors.remove(actor)
-
-    def add_genre(self, genre):
-        if type(genre) is Genre and genre not in self.__genres:
-            self.__genres.append(genre)
-
-    def remove_genre(self, genre):
-        if genre in self.__genres:
-            self.__genres.remove(genre)
-
+"""
 def main():
     movie = Movie("Moana", 2016)
     movie2 = Movie("Moana", 1999)
@@ -143,3 +147,4 @@ def main():
     movie.runtime_minutes = 107
     print("Movie runtime: {} minutes".format(movie.runtime_minutes))
 main()
+"""

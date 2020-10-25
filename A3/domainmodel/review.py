@@ -57,7 +57,7 @@ class Review:
 
     def __eq__(self, other):
         return self.__review_rating == other.__review_rating and self.__movie == other.__movie and self.__review_text == other.__review_text and self.__timestamp == other.__timestamp
-
+"""
 def main():
     movie = Movie("Moana", 2016)
     review_text = "This movie was very enjoyable."
@@ -69,3 +69,4 @@ def main():
     print("Rating: {}".format(review.rating))
 main()
 
+"""

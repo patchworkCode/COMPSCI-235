@@ -63,7 +63,7 @@ def test_index(client):
     # Check that we can retrieve the home page.
     response = client.get('/')
     assert response.status_code == 200
-    assert b'The COVID Pandemic of 2020' in response.data
+
 
 
 def test_login_required_to_comment(client):
@@ -102,7 +102,7 @@ def test_comment_with_invalid_input(client, auth, comment, messages):
     # Check that supplying invalid comment text generates appropriate error messages.
     for message in messages:
         assert message in response.data
-
+#these ones
 
 def test_articles_without_date(client):
     # Check that we can retrieve the articles page.
@@ -122,7 +122,7 @@ def test_articles_with_date(client):
     # Check that all articles on the requested date are included on the page.
     assert b'Saturday February 29 2020' in response.data
     assert b'Covid 19 coronavirus: US deaths double in two days, Trump says quarantine not necessary' in response.data
-
+#end here
 
 def test_articles_with_comment(client):
     # Check that we can retrieve the articles page.

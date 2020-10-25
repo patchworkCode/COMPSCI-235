@@ -17,8 +17,8 @@
 </div>
     <div class="topnav">
         <a id="home" href="{{ url_for('home_bp.home') }}">Home</a>
-        <a id="movies" href="{{ url_for('movie_bp.movies') }}">Movies</a>
-        <a id="search">Search</a>
+        <a id="movies" href="{{ url_for('movie_bp.movies_by_rank') }}">Movies</a>
+        <a id="search">Tags</a>
     </div>
     <div class="page_content">
         {% block content %}

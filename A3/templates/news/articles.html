@@ -4,7 +4,22 @@
 
 <main id="main">
     <header id="article-header">
-        <h1>{{ articles_title }}</h1>
+    {% for article in articles %}
+    <article id="article">
+        <h2>{{article.title}}</h2>
+        <h3>Year of Release, {{article.year}}</h3>
+        <h3>Rank, {{article.rank}}</h3>
+        <p>{{article.first_para}}</p>
+        <div style="float:left">
+            {% for tag in article.tags %}
+            <button class="btn-general" onclick="location.href='{{ tag_urls[tag.name] }}'">{{ tag.name }}</button>
+            {% endfor %}
+        </div>
+        {% if article.id == show_comments_for_article %}
+
+        {% endif %}
+    </article>
+    {% endfor %}
     </header>
 
     <nav style="clear:both">
@@ -34,20 +49,7 @@
             </div>
         </nav>
 
-    {% for article in articles %}
-    <article id="article">
-        <h2>{{article.title}}</h2>
-        <p>{{article.first_para}}</p>
-        <div style="float:left">
-            {% for tag in article.tags %}
-            <button class="btn-general" onclick="location.href='{{ tag_urls[tag.name] }}'">{{ tag.name }}</button>
-            {% endfor %}
-        </div>
-        {% if article.id == show_comments_for_article %}
 
-        {% endif %}
-    </article>
-    {% endfor %}
 
 
 </main>

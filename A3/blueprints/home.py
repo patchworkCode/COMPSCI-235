@@ -1,13 +1,16 @@
-from flask import Blueprint, render_template, url_for
-from flask_wtf import FlaskForm
-from wtforms import IntegerField, SubmitField
-from wtforms.validators import DataRequired
+from flask import Blueprint, render_template
 
-#import people_web_app.adapters.repository as repo
+import A3.utilities.utilities as utilities
 
-home_blueprint = Blueprint('home_bp', __name__)
+
+home_blueprint = Blueprint(
+    'home_bp', __name__)
 
 
 @home_blueprint.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return render_template(
+        'home/home.html',
+        #selected_articles=utilities.get_selected_articles(),
+        #tag_urls=utilities.get_tags_and_urls()
+    )

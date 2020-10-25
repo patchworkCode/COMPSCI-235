@@ -1,14 +1,14 @@
 import os
 import pytest
 
-from covid import create_app
-from covid.adapters import memory_repository
-from covid.adapters.memory_repository import MemoryRepository
+from A3 import create_app
+from A3.adapters import memory_repository
+from A3.adapters.memory_repository import MemoryRepository
 
 
-TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'ianwo', 'OneDrive', 'Documents', 'PythonDev', 'repo 02.07.2020',
-                              'COVID-19', 'tests', 'data')
-#TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'iwar006', 'Documents', 'Python dev', 'COVID-19', 'tests', 'data')
+#TEST_DATA_PATH = 'C:\\Users\\idenf\\OneDrive\\Documents\\GitHub\\COMPSCI-235\\tests\\data'
+
+TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'idenf', 'OneDrive', 'Documents', 'GitHub', 'COMPSCI-235', 'tests', 'data')
 
 
 @pytest.fixture

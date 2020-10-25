@@ -40,6 +40,8 @@ class TestDirectorMethods:
         assert director2.director_full_name is None
         director3 = Director(42)
         assert director3.director_full_name is None
+
+"""
 def main():
     director1 = Director("Cameron Diaz")
     director2 = Director("Angelina Jolie")
@@ -48,3 +50,4 @@ def main():
     print(director1 > director3)
     print(director2 < director3)
 main()
+"""

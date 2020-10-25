@@ -26,6 +26,8 @@ class Genre:
     def __hash__(self):
         return hash(self.__genre_name)
 
+
+"""
 def main():
     genre1 = Genre("Horror")
     print(genre1)
@@ -35,3 +37,4 @@ def main():
     print(genre3)
     print(genre1 < genre3)
 main()
+"""
