@@ -1,9 +1,7 @@
 from flask import Blueprint
 from flask import request, render_template, redirect, url_for, session
 
-
 import A3.adapters.repository as repo
-import A3.utilities.utilities as utilities
 import A3.utilities.services as services
 
 # Configure Blueprint.
