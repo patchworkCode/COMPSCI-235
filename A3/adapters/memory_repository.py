@@ -8,122 +8,103 @@ from A3.domainmodel.movie import Movie
 
 
 class MemoryRepository(AbstractRepository):
-    # Articles ordered by date, not id. id is assumed unique.
-
     def __init__(self):
-        self._articles = list()
-        self._articles_index = dict()
-        self._tags = list()
-        self._users = list()
-        self._comments = list()
+        self._movies = list()
+        self._movies_index = dict()
 
-    def add_article(self, article: Movie):
-        insort_left(self._articles, article)
-        self._articles_index[article.rank] = article
+    def add_movie(self, movie: Movie):
+        insort_left(self._movies, movie)
+        self._movies_index[movie.rank] = movie
 
-    def get_article(self, id: int) -> Movie:
-        article = None
+    def get_movie(self, id: int) -> Movie:
+        movie = None
 
         try:
-            article = self._articles_index[id]
+            movie = self._movies_index[id]
         except KeyError:
-            pass  # Ignore exception and return None.
-
-        return article
-
-    def get_movies_by_rank(self, target_date) -> List[Movie]:
-        matching_articles = list()
-        try:
-            # index = self.article_index(target_article)
-            for article in self._articles:
-                if int(article.rank) == int(target_date):
-                    matching_articles.append(article)
-        except ValueError:
-            # No articles for specified date. Simply return an empty list.
             pass
-        return matching_articles
-        # will always return one article
 
-    def get_number_of_articles(self):
-        return len(self._articles)
+        return movie
 
-    def get_first_article(self):
-        article = None
+    def get_movies_by_rank(self, target_rank) -> List[Movie]:
+        matching_movies = list()
+        try:
+            for movie in self._movies:
+                if int(movie.rank) == int(target_rank):
+                    matching_movies.append(movie)
+        except ValueError:
+            pass
+        return matching_movies
 
-        if len(self._articles) > 0:
-            article = self._articles[0]
-        return article
+    def get_number_of_movies(self):
+        return len(self._movies)
 
-    def get_last_article(self):
-        article = None
+    def get_first_movie(self):
+        movie = None
 
-        if len(self._articles) > 0:
-            article = self._articles[-1]
-        return article
+        if len(self._movies) > 0:
+            movie = self._movies[0]
+        return movie
 
-    def get_date_of_previous_article(self, article: Movie):
-        previous_date = None
+    def get_last_movie(self):
+        movie = None
+
+        if len(self._movies) > 0:
+            movie = self._movies[-1]
+        return movie
+
+    def get_rank_of_previous_movie(self, movie: Movie):
+        previous_rank = None
 
         try:
-            index = self.article_index(article)
-            for stored_article in reversed(self._articles[0:index]):
-                if stored_article.rank < article.rank:
-                    previous_date = stored_article.rank
+            index = self.movie_index(movie)
+            for stored_movie in reversed(self._movies[0:index]):
+                if stored_movie.rank < movie.rank:
+                    previous_rank = stored_movie.rank
                     break
         except ValueError:
-            # No earlier articles, so return None.
             pass
-        #print(previous_date)
-        return previous_date
+        return previous_rank
 
-    def get_date_of_next_article(self, article: Movie):
-        next_date = None
+    def get_rank_of_next_movie(self, movie: Movie):
+        next_rank = None
 
         try:
-            index = self.article_index(article)
-            for stored_article in self._articles[index + 1:len(self._articles)]:
-                if stored_article.rank > article.rank:
-                    next_date = stored_article.rank
+            index = self.movie_index(movie)
+            for stored_movie in self._movies[index + 1:len(self._movies)]:
+                if stored_movie.rank > movie.rank:
+                    next_rank = stored_movie.rank
                     break
         except ValueError:
-            # No subsequent articles, so return None.
+            # No subsequent movies, so return None.
             pass
 
-        return next_date
+        return next_rank
 
-    # Helper method to return article index.
-    def article_index(self, article: Movie):
-        index = bisect_left(self._articles, article)
+    def movie_index(self, movie: Movie):
+        index = bisect_left(self._movies, movie)
         return index
 
 
 def read_csv_file(filename: str):
     with open(filename, encoding='utf-8-sig') as infile:
         reader = csv.reader(infile)
-
-        # Read first line of the the CSV file.
         headers = next(reader)
-
-        # Read remaining rows from the CSV file.
         for row in reader:
-            # Strip any leading/trailing white space from data read.
             row = [item.strip() for item in row]
             yield row
 
 
-def load_articles_and_tags(data_path: str, repo: MemoryRepository):
+def load_movies_and_tags(data_path: str, repo: MemoryRepository):
     for data_row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
-        article = Movie(
+        movie = Movie(
             movie_title=data_row[1],
             movie_year=int(data_row[6]),
             rank=int(data_row[0])
         )
         # Add the Article to the repository.
-        repo.add_article(article)
-
-    # Create Tag objects, associate them with Articles and add them to the repository.
+        repo.add_movie(movie)
 
 
 def populate(data_path: str, repo: MemoryRepository):
-    # Load articles and tags into the repository.
-    load_articles_and_tags(data_path, repo)
+    load_movies_and_tags(data_path, repo)

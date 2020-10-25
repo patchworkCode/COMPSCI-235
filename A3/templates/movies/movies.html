@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <header id="movie-header">
+    {% for movie in movies %}
+    <movie id="movie">
+        <h2>{{movie.title}}</h2>
+        <h3>Year of Release, {{movie.year}}</h3>
+        <h3>Rank, {{movie.rank}}</h3>
+    </movie>
+    {% endfor %}
+    </header>
+
+    <nav style="clear:both">
+            <div style="float:left">
+                {% if first_movie_url is not none %}
+                    <button onclick="location.href='{{first_movie_url}}'">First</button>
+                {% else %}
+                    <button disabled>First</button>
+                {% endif %}
+                {% if prev_movie_url is not none %}
+                    <button onclick="location.href='{{prev_movie_url}}'">Previous</button>
+                {% else %}
+                    <button disabled>Previous</button>
+                {% endif %}
+            </div>
+            <div style="float:right">
+                {% if next_movie_url is not none %}
+                    <button onclick="location.href='{{next_movie_url}}'">Next</button>
+                {% else %}
+                    <button disabled>Next</button>
+                {% endif %}
+                {% if last_movie_url is not none %}
+                    <button onclick="location.href='{{last_movie_url}}'">Last</button>
+                {% else %}
+                    <button disabled>Last</button>
+                {% endif %}
+            </div>
+        </nav>
+
+
+
+
+</main>
+{% endblock %}

@@ -1,4 +1,3 @@
-from datetime import date
 
 from A3.domainmodel.movie import Movie
 
@@ -14,7 +13,7 @@ def movie():
     )
 
 
-def test_article_construction(movie):
+def test_movie_construction(movie):
     assert movie.rank == 1
     assert movie.movie_title == 'test_movie2'
     assert movie.movie_year == 2012
@@ -23,14 +22,14 @@ def test_article_construction(movie):
         movie) == '<Movie test_movie2, 2012>'
 
 
-def test_article_less_than_operator():
-    article_1 = Movie(
+def test_movie_less_than_operator():
+    movie_1 = Movie(
         2, 'test_movie3', 2011
     )
 
-    article_2 = Movie(
+    movie_2 = Movie(
         3, 'test_move4', 2015
     )
 
-    assert article_1 < article_2
+    assert movie_1 < movie_2
 

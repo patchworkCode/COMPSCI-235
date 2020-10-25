@@ -2,21 +2,13 @@
 
 ## Description
 
-A Web application that demonstrates use of Python's Flask framework. The application makes use of libraries such as the Jinja templating library and WTForms. Architectural design patterns and principles including Repository, Dependency Inversion and Single Responsibility have been used to design the application. The application uses Flask Blueprints to maintain a separation of concerns between application functions. Testing includes unit and end-to-end testing using the pytest tool. 
-
+A web application that instances webpages for movies
 ## Installation
 
 **Installation via requirements.txt**
 
-03_COVID_repository
+A3
 
-04_COVID_Web_app
-
-05_hello_jinja
-
-06_people_web_app
-
-07_COVID_web_app_sqlitedb
 ```shell
 $ cd COMPSCI-235
 $ py -3 -m venv venv
@@ -49,16 +41,30 @@ The *COMPSCI-235/.env* file contains variable settings. They are set with approp
 
 
 ## Testing
+From the COMPSCI-235 directory, and within the activated virtual environment (see venv\Scripts\activate above):
+
+```
+$ python -m pytest
+```
+
+**Important**
+ 
+ in `A3\adapters\memomory_repository.py` the `load_movies_and_tags` method has a loop:
+ 
+```def load_movies_and_tags(data_path: str, repo: MemoryRepository):
+for data_row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
+```
+to enable testing, the file must be changed to `test_movies.csv`
 
 Testing requires that file *COMPSCI-235/tests/conftest.py* be edited to set the value of `TEST_DATA_PATH`. You should set this to the absolute path of the *COMPSCI-235/tests/data* directory. 
 
 E.g. 
 
-`TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'ian', 'Documents', 'Python dev', 'COVID-19', 'tests', 'data')`
+`TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'idenf', 'OneDrive', 'Documents', 'GitHub', 'COMPSCI-235', 'tests', 'data')`
 
 assigns TEST_DATA_PATH with the following value (the use of os.path.join and os.sep ensures use of the correct platform path separator):
 
-`C:\Users\ian\Documents\python-dev\COVID-19\tests\data`
+`C:\Users\idenf\Ondrive\Documents\GitHub\Compsci-235\tests\data`
 
 You can then run tests from within PyCharm.
 

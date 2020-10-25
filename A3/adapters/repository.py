@@ -1,6 +1,5 @@
 import abc
 from typing import List
-from datetime import date
 
 from A3.domainmodel.movie import Movie
 
@@ -17,54 +16,54 @@ class RepositoryException(Exception):
 class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
-    def add_article(self, article: Movie):
-        """ Adds an Article to the repository. """
+    def add_movie(self, movie: Movie):
+        """ Adds an movie to the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movies_by_rank(self, target_date: date) -> List[Movie]:
-        """ Returns a list of Articles that were published on target_date.
+    def get_movies_by_rank(self, target_rank) -> List[Movie]:
+        """ Returns a list of movies that were published on target_rank.
 
-        If there are no Articles on the given date, this method returns an empty list.
+        If there are no movies on the given rank, this method returns an empty list.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_number_of_articles(self):
-        """ Returns the number of Articles in the repository. """
+    def get_number_of_movies(self):
+        """ Returns the number of movies in the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_first_article(self) -> Movie:
-        """ Returns the first Article, ordered by date, from the repository.
+    def get_first_movie(self) -> Movie:
+        """ Returns the first movie, ordered by rank, from the repository.
 
         Returns None if the repository is empty.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_last_article(self) -> Movie:
-        """ Returns the last Article, ordered by date, from the repository.
+    def get_last_movie(self) -> Movie:
+        """ Returns the last movie, ordered by rank, from the repository.
 
         Returns None if the repository is empty.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_date_of_previous_article(self, article: Movie):
-        """ Returns the date of an Article that immediately precedes article.
+    def get_rank_of_previous_movie(self, movie: Movie):
+        """ Returns the rank of an movie that immediately precedes movie.
 
-        If article is the first Article in the repository, this method returns None because there are no Articles
-        on a previous date.
+        If movie is the first movie in the repository, this method returns None because there are no movies
+        on a previous rank.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_date_of_next_article(self, article: Movie):
-        """ Returns the date of an Article that immediately follows article.
+    def get_rank_of_next_movie(self, movie: Movie):
+        """ Returns the rank of an movie that immediately follows movie.
 
-        If article is the last Article in the repository, this method returns None because there are no Articles
-        on a later date.
+        If movie is the last movie in the repository, this method returns None because there are no movies
+        on a later rank.
         """
         raise NotImplementedError
 

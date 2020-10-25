@@ -18,7 +18,7 @@ def create_app(test_config=None):
     if test_config is not None:
         # Load test configuration, and overrride any configuration settings.
         app.config.from_mapping(test_config)
-        data_path = os.path.join('C:', os.sep, 'Users', 'idenf', 'Documents', 'GitHub', 'tests', 'data')
+        data_path = os.path.join('C:', os.sep, 'Users', 'idenf', 'OneDrive', 'Documents', 'GitHub', 'COMPSCI-235', 'tests', 'data')
 
     # Create the MemoryRepository implementation for a memory-based repository.
     repo.repo_instance = MemoryRepository()

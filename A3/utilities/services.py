@@ -1,23 +1,9 @@
 from typing import Iterable
-import random
-
-
-from typing import Iterable
 
 from A3.adapters.repository import AbstractRepository
 from A3.domainmodel.movie import Movie
 
-
-# ============================================
-# Functions to convert dicts to model entities
-# ============================================
-
-
-""" 
-useful one
-"""
-
-class NonExistentArticleException(Exception):
+class NonExistentmovieException(Exception):
     pass
 
 
@@ -25,67 +11,57 @@ class UnknownUserException(Exception):
     pass
 
 
-def get_article(article_id: int, repo: AbstractRepository):
-    article = repo.get_article(article_id)
+def get_movie(movie_id: int, repo: AbstractRepository):
+    movie = repo.get_movie(movie_id)
 
-    if article is None:
-        raise NonExistentArticleException
+    if movie is None:
+        raise NonExistentmovieException
 
-    return article_to_dict(article)
-
-
-def get_first_article(repo: AbstractRepository):
-
-    article = repo.get_first_article()
-
-    return article_to_dict(article)
+    return movie_to_dict(movie)
 
 
-def get_last_article(repo: AbstractRepository):
+def get_first_movie(repo: AbstractRepository):
 
-    article = repo.get_last_article()
-    return article_to_dict(article)
+    movie = repo.get_first_movie()
+
+    return movie_to_dict(movie)
+
+
+def get_last_movie(repo: AbstractRepository):
+
+    movie = repo.get_last_movie()
+    return movie_to_dict(movie)
 
 
 def get_movies_by_rank(rank, repo: AbstractRepository):
-    # Returns articles for the target date (empty if no matches), the date of the previous article (might be null), the date of the next article (might be null)
-    articles = repo.get_movies_by_rank(target_date=rank)
+    movies = repo.get_movies_by_rank(target_rank=rank)
 
-    articles_dto = list()
-    prev_date = next_date = None
+    movies_dto = list()
+    prev_rank = next_rank = None
 
-    if len(articles) > 0:
-        prev_date = repo.get_date_of_previous_article(articles[0])
-        next_date = repo.get_date_of_next_article(articles[0])
+    if len(movies) > 0:
+        prev_rank = repo.get_rank_of_previous_movie(movies[0])
+        next_rank = repo.get_rank_of_next_movie(movies[0])
+        movies_dto = movies_to_dict(movies)
 
-        # Convert Articles to dictionary form.
-        articles_dto = articles_to_dict(articles)
-
-    return articles_dto, prev_date, next_date
+    return movies_dto, prev_rank, next_rank
 
 
-# ============================================
-# Functions to convert model entities to dicts
-# ============================================
-
-def article_to_dict(article: Movie):
-    article_dict = {
-        'title': article.movie_title,
-        'year': article.movie_year,
-        'rank': article.rank
+def movie_to_dict(movie: Movie):
+    movie_dict = {
+        'title': movie.movie_title,
+        'year': movie.movie_year,
+        'rank': movie.rank
     }
-    return article_dict
+    return movie_dict
 
 
-def articles_to_dict(articles: Iterable[Movie]):
-    return [article_to_dict(article) for article in articles]
+def movies_to_dict(movies: Iterable[Movie]):
+    return [movie_to_dict(movie) for movie in movies]
 
-# ============================================
-# Functions to convert dicts to model entities
-# ============================================
 
-def dict_to_article(dict):
-    article = Movie(dict.title, dict.year, dict.rank)
+def dict_to_movie(dict):
+    movie = Movie(dict.title, dict.year, dict.rank)
     # Note there's no comments or tags.
-    return article
+    return movie
 

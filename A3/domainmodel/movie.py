@@ -1,7 +1,3 @@
-from A3.domainmodel.genre import Genre
-from A3.domainmodel.actor import Actor
-from A3.domainmodel.director import Director
-
 class Movie:
     def __init__(self, rank: int, movie_title: str, movie_year: int):
         # TITLE
@@ -127,24 +123,3 @@ class Movie:
             raise ValueError("ValueError exception thrown: Not positive")
         else:
             self._runtime_minutes = runtime
-
-"""
-def main():
-    movie = Movie("Moana", 2016)
-    movie2 = Movie("Moana", 1999)
-    print("here", movie2 < movie)
-    print(movie)
-
-    director = Director("Ron Clements")
-    movie.director = director
-    print(movie.director)
-
-    actors = [Actor("Auli'i Cravalho"), Actor("Dwayne Johnson"), Actor("Rachel House"), Actor("Temuera Morrison")]
-    for actor in actors:
-        movie.add_actor(actor)
-    print(movie.actors)
-
-    movie.runtime_minutes = 107
-    print("Movie runtime: {} minutes".format(movie.runtime_minutes))
-main()
-"""
