@@ -1,4 +1,4 @@
-# CS-235 Flix
+# CS-235 Flix ASSIGNMENT 2
 
 ## Description
 
