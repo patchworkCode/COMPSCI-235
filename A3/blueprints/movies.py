@@ -12,7 +12,7 @@ movie_blueprint = Blueprint(
 @movie_blueprint.route('/movies_by_rank', methods=['GET'])
 def movies_by_rank():
     target_rank = request.args.get('rank')
-
+    print("test", repo.repo_instance)
     first_movie = services.get_first_movie(repo.repo_instance)
     last_movie = services.get_last_movie(repo.repo_instance)
 

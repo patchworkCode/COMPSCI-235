@@ -22,15 +22,9 @@ class Movie:
 
         self._description = None
         self._director = None
-        self._actors = []
-        self._genres = []
+        self._actors = None
+        self._genres = None
         self._runtime_minutes = 0
-
-        self.description = None
-        self.director = None
-        self.actors = []
-        self.genres = []
-        self.runtime_minutes = 0
 
 
     @property

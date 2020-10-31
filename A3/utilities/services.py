@@ -23,7 +23,7 @@ def get_movie(movie_id: int, repo: AbstractRepository):
 def get_first_movie(repo: AbstractRepository):
 
     movie = repo.get_first_movie()
-
+    print(movie)
     return movie_to_dict(movie)
 
 
@@ -48,6 +48,7 @@ def get_movies_by_rank(rank, repo: AbstractRepository):
 
 
 def movie_to_dict(movie: Movie):
+    #print(movie.movie_title)
     movie_dict = {
         'title': movie.movie_title,
         'year': movie.movie_year,

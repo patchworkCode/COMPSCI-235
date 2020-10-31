@@ -96,7 +96,7 @@ def read_csv_file(filename: str):
 
 
 def load_movies_and_tags(data_path: str, repo: MemoryRepository):
-    for data_row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
+    for data_row in read_csv_file(os.path.join(data_path, 'Data1000Movies')):
         movie = Movie(
             movie_title=data_row[1],
             movie_year=int(data_row[6]),

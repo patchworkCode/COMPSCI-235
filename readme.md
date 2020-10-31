@@ -1,8 +1,8 @@
-# CS-235 Flix ASSIGNMENT 2
+# CS-235 Flix ASSIGNMENT 3
 
 ## Description
 
-A web application that instances webpages for movies
+A web application that instances webpages for movies and implements Databases
 ## Installation
 
 **Installation via requirements.txt**
@@ -54,7 +54,12 @@ $ python -m pytest
 ```def load_movies_and_tags(data_path: str, repo: MemoryRepository):
 for data_row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
 ```
-to enable testing, the file must be changed to `test_movies.csv`
+and in `A3\adapters\database_repository.py` the `populate` function executes:
+ 
+```
+cursor.executemany(insert_movies, movie_record_generator(os.path.join(data_path, 'Data1000Movies.csv')))
+```
+to enable testing, the both paths must be changed to `test_movies.csv`
 
 Testing requires that file *COMPSCI-235/tests/conftest.py* be edited to set the value of `TEST_DATA_PATH`. You should set this to the absolute path of the *COMPSCI-235/tests/data* directory. 
 
